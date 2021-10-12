@@ -1,4 +1,4 @@
-# Azure Site 2 Site VPN for Home Lab
+# Azure Site-to-Site VPN for Home Lab
 For Enterprise deployment for Site-to-Site VPN, follow Microsoft docuementation [here](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli).
 
 ![](https://guptanishith.com/wp-content/uploads/2021/10/site-to-site-diagram.png)
@@ -72,10 +72,11 @@ The script uses variables to be passed as a value to the parameters/switches. Th
 - **VpnGWSku -** Define a Vpn Gateway SKU. `Basic` or `VpnGw1` should be enough for home lab. More info at [Azure Gateway SKUs](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#gwsku)
 - **VpnGWGen -** Defining a generation is required if any SKU other than Basic and VpnGw1 is used. Possible values are `Generation1` and `Generation2`. Add `--vpn-gateway-generation Generation1/Generation2` in `az network vnet-gateway create` command in the script, depending on Gateway SKU choice.
 - **LocalNWGW -** Define a name for Local Network Gateway, for example `OnPLocalNWGateway`. It represents on-premise(_home_) VPN.
-- **LocalNWGWPip -**
-- **LocalNWGWPf -**
-- VPNCon=Hub2OnPS2SVpnConnection
-- **SharedKey -**
+- **LocalNWGWPip -** Define the public IP of home router/vpn device. Use [WhatismyIp](https://whatismyipaddress.com/) to determine the public IP. If you have a static public IP then use that. Everytime the public IP changes, simply go to Local Network Gateway that was created in Azure, under **Settings** click **Configuration**. Paste the new IP in **IP address** field and click **Save**.
+![](https://guptanishith.com/wp-content/uploads/2021/10/Local-Network-gateway.png)
+- **LocalNWGWPf -** Define address space of on-prem (_home_) network, for example `192.168.0.0/16`. Type `192.168.20.0/16 192.168.15.0/24` to define more than one address space. These are the internal IP address located on the on-premises (_home_) network and will be routed through VPN Gateway in Azure to VPN device (_pfsense or rras_) on-prem. If the IP address range changes or an additional address space is to be introduced then simply go to Local Network Gateway/Configuration, make the changes and click Save.
+- **VPNCon -** Define a name for the logical connection, for example `Hub2OnPS2SVpnConnection`.
+- **SharedKey -** Define a shared IPSecv2 key that was used during the VPN device configuration in on-prem (_home_).
 
 ## Final Comments
 Wait for the deployment of VPN Gateway to finish. It may take 30 minutes or so. Once completed, go to the Local Network Gateway that was created, under **Settings** click **Connections**. The status should show **Connected**. Depending on vpn setup (_pfsense or rras_) in home lab, you may have to trigger the connection manually.
