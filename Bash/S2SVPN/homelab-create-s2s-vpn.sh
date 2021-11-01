@@ -68,5 +68,5 @@ az network vpn-connection create \
   --resource-group $RGName \
   --vnet-gateway1 $VpnGW \
   --location centralindia \
-  --shared-key abc123 \
+  --shared-key $SharedKey \
   --local-gateway2 $LocalNWGW
