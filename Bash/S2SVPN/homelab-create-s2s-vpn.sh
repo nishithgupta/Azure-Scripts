@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define variables. A detailed description of these variables in available in README.md file
+# Define variables. A detailed description of these variables is available in README.md file
 RGName=
 vNet=
 vNetPf=
