@@ -1,6 +1,9 @@
-# Create a Windows VM
+# Create a Windows VM in Azure
+
+![](https://guptanishith.com/wp-content/uploads/2021/11/Azure-VM-icon.png)
+
 The script creates a windows VM in Azure.
-The script assumes that a Resource Group, vNet and a subnet is already in place.
+The script also assumes that a Resource Group, vNet and a subnet is already in place.
 
 ### _Define Variables_
 
